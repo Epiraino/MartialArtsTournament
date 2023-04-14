@@ -1,0 +1,38 @@
+@startuml
+actor "Tournament Administrator" as admin
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+admin -> web : Access user management page
+web -> api : Request user list
+api -> db : Retrieve users and their roles
+db --> api : Return user list and roles
+api --> web : Display user list and roles
+
+web --> admin : Show user management interface
+
+admin -> web : Update user roles
+web -> api : Send updated user roles
+api -> db : Update user roles in the database
+db --> api : Confirm update
+api --> web : Display success or error message
+
+web --> admin : Show updated user roles or error message
+@enduml
+
+
+
+
+This diagram illustrates the process of a tournament administrator managing access levels for different user roles, such
+ as administrators and referees. The administrator accesses the user management page on the web interface, which
+ requests the user list and their roles from the backend API. The API retrieves the users and their roles from the
+ database and returns the information to the web interface, which then displays the user list and roles to the
+ administrator.
+
+The administrator can update user roles through the web interface, which sends the updated user roles to the backend
+API. The API updates the user roles in the database and returns a confirmation of the update. The web interface then
+displays either the updated user roles or an error message, depending on the outcome of the update.

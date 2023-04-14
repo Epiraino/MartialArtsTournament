@@ -1,0 +1,34 @@
+@startuml
+actor "User" as user
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+user -> web : Enter email and password
+web -> api : Send login request with email and password
+api -> db : Verify user credentials
+db --> api : Return authentication status
+api --> web : Display login success or failure message
+
+web --> user : Show account dashboard or error message
+
+user -> web : Click on logout
+web -> api : Send logout request
+api --> web : Invalidate session
+
+web --> user : Redirect to login page
+@enduml
+
+
+
+
+This diagram illustrates the process of a user logging in and out of the system securely with their email and password.
+The user enters their email and password on the web interface, which sends a login request to the backend API. The API
+verifies the user's credentials in the database and returns an authentication status. If successful, the user is shown
+their account dashboard; otherwise, an error message is displayed.
+
+When the user wants to log out, they click on the logout button, and the web interface sends a logout request to the
+backend API. The API invalidates the user's session, and the web interface redirects the user to the login page.

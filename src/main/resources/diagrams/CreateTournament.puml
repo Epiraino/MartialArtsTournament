@@ -1,0 +1,36 @@
+@startuml
+
+start
+
+:User logs in;
+
+if (User is an admin?) then (yes)
+  :User navigates to
+   tournament creation page;
+
+  :User enters tournament
+   details;
+
+  :User submits form;
+
+  :System validates
+   tournament details;
+
+  if (Validation successful?) then (yes)
+    :System saves tournament
+     to database;
+    :User is redirected to
+     tournament management
+     page;
+  else (no)
+    :System shows validation
+     errors to the user;
+  endif
+else (no)
+  :User is not authorized
+   to create a tournament;
+endif
+
+stop
+
+@enduml

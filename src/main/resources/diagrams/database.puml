@@ -1,0 +1,103 @@
+@startuml
+
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define primary_key(x) <b><color:red>x</color></b>
+!define foreign_key(x) <i><color:blue>x</color></i>
+
+Table(user, "User")
+Table(tournament, "Tournament")
+Table(division, "Division")
+Table(fighter, "Fighter")
+Table(referee, "Referee")
+Table(match, "Match")
+Table(bracket, "Bracket")
+Table(score, "Score")
+Table(live_stream, "Live Stream")
+Table(analytics, "Analytics")
+
+' Fields
+user : primary_key(id)
+user : name
+user : email
+user : password
+user : role ENUM('ADMIN', 'REFEREE', 'FIGHTER')
+
+tournament : primary_key(id)
+tournament : name
+tournament : location
+tournament : date
+tournament : rules
+tournament : foreign_key(admin_id)
+
+division : primary_key(id)
+division : name
+division : weight_class
+division : belt_rank
+division : age_group
+division : foreign_key(tournament_id)
+
+fighter : primary_key(id)
+fighter : foreign_key(user_id)
+fighter : name
+fighter : age
+fighter : weight
+fighter : belt_rank
+fighter : contact_information
+fighter : foreign_key(division_id)
+
+referee : primary_key(id)
+referee : foreign_key(user_id)
+referee : name
+referee : certification_level
+referee : contact_information
+
+match : primary_key(id)
+match : time
+match : location
+match : foreign_key(fighter1_id)
+match : foreign_key(fighter2_id)
+match : foreign_key(referee_id)
+match : foreign_key(division_id)
+match : status ENUM('SCHEDULED', 'IN_PROGRESS', 'COMPLETED')
+
+bracket : primary_key(id)
+bracket : foreign_key(match_id)
+bracket : foreign_key(division_id)
+bracket : foreign_key(winner_id)
+bracket : round_number
+
+score : primary_key(id)
+score : foreign_key(match_id)
+score : foreign_key(referee_id)
+score : fighter1_score
+score : fighter2_score
+
+live_stream : primary_key(id)
+live_stream : foreign_key(match_id)
+live_stream : url
+live_stream : status ENUM('NOT_STARTED', 'LIVE', 'ENDED')
+
+analytics : primary_key(id)
+analytics : foreign_key(tournament_id)
+analytics : registered_fighters_count
+analytics : completed_matches_count
+analytics : match_statistics
+
+' Relationships
+user "1" -- "0..*" tournament : admin
+user "1" -- "0..*" fighter
+user "1" -- "0..*" referee
+tournament "1" -- "0..*" division
+tournament "1" -- "0..*" analytics
+division "1" -- "0..*" fighter
+division "1" -- "0..*" match
+division "1" -- "0..*" bracket
+fighter "1" -- "0..1" bracket : winner
+fighter "1" -- "0..*" match : fighter1
+fighter "1" -- "0..*" match : fighter2
+referee "1" -- "0..*" match
+match "1" -- "0..*" score
+match "1" -- "0..*" live_stream
+match "1" -- "0..*" bracket
+
+@enduml

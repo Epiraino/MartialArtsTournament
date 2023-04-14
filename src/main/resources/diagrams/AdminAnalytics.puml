@@ -1,0 +1,25 @@
+@startuml
+actor "Tournament Administrator" as admin
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+admin -> web : Access tournament analytics page
+web -> api : Request tournament analytics data
+api -> db : Retrieve analytics data
+db --> api : Return analytics data
+api --> web : Display tournament analytics
+
+web --> admin : Show analytics data (registered fighters, completed matches, winners, etc.)
+@enduml
+
+
+
+This diagram illustrates the process of a tournament administrator accessing analytics about the tournament. The
+administrator accesses the tournament analytics page on the web interface, which requests the tournament analytics data
+from the backend API. The API retrieves the analytics data from the database and sends it back to the web interface,
+which displays the tournament analytics, including the number of fighters registered, the number of matches completed,
+the winners, and any statistical insights available. The web interface then shows the analytics data to the administrator.

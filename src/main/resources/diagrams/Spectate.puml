@@ -1,0 +1,33 @@
+@startuml
+actor "Spectator" as spectator
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+participant "Live Streaming Service" as stream
+
+spectator -> web : Access live streaming page
+web -> api : Request live stream information
+api -> db : Retrieve live stream information
+db --> api : Return live stream information
+api --> web : Display available live streams
+
+spectator -> web : Select a live stream
+web -> stream : Request live stream content
+stream --> web : Provide live stream content
+web --> spectator : Display live stream
+@enduml
+
+
+
+This diagram illustrates the process of a spectator viewing live streams of the tournament matches. The spectator
+accesses the live streaming page on the web interface, which requests the live stream information from the backend API.
+The API retrieves this information from the database and sends it back to the web interface, which displays the
+available live streams to the spectator.
+
+The spectator then selects a live stream, and the web interface requests the live stream content from the live streaming
+ service. The live streaming service provides the content to the web interface, which then displays the live stream to
+ the spectator.

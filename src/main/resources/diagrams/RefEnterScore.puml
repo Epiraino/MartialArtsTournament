@@ -1,0 +1,43 @@
+@startuml
+
+actor "Referee" as referee
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+referee -> web : Access match scoring page
+web -> api : Request match details
+api -> db : Retrieve match details
+db --> api : Return match details
+api --> web : Display match details
+
+referee -> web : Enter scores for each match
+web -> api : Update match scores
+api -> db : Update scores in the database
+db --> api : Scores updated successfully
+api --> web : Scores updated successfully
+web --> referee : Display updated match results
+
+web -> api : Request updated brackets
+api -> db : Retrieve updated brackets
+db --> api : Return updated brackets
+api --> web : Display updated brackets
+web -> web : Publish updated brackets and results on the website
+@enduml
+
+
+This diagram illustrates the process of a referee entering scores for each match, and the system automatically updating
+the brackets and displaying the results on the website. The referee accesses the match scoring page on the web
+interface, which requests the match details from the backend API. The API retrieves this information from the database
+and sends it back to the web interface, which displays it to the referee.
+
+The referee then enters the scores for each match through the web interface, which sends a request to the API to update
+the match scores. The API updates the scores in the database, and once the scores are updated successfully, the API
+sends a response back to the web interface, which displays the updated match results to the referee.
+
+The web interface requests the updated brackets from the API, which retrieves them from the database and sends them back
+to the web interface. The web interface then displays the updated brackets and publishes them, along with the updated
+match results, on the website for participants and spectators to see.

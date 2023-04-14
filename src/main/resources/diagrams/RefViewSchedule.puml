@@ -1,0 +1,23 @@
+@startuml
+actor "Referee" as referee
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+referee -> web : Access referee's profile page
+web -> api : Request assigned matches and time slots
+api -> db : Retrieve matches and time slots for referee
+db --> api : Return match and time slot data
+api --> web : Display assigned matches and time slots
+
+web --> referee : Show list of assigned matches and time slots
+@enduml
+
+
+This diagram illustrates the process of a referee viewing a list of their assigned matches and time slots. The referee
+accesses their profile page on the web interface, which requests their assigned matches and time slots from the backend
+API. The API retrieves the match and time slot data for the referee from the database and returns the information to the
+web interface, which then displays the list of assigned matches and time slots to the referee.

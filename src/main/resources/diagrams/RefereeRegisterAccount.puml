@@ -1,0 +1,21 @@
+@startuml
+
+actor "Referee" as referee
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+referee -> web : Access registration page
+web -> api : Request registration form
+api --> web : Display registration form
+
+referee -> web : Enter name, email, password, certification level, and contact information
+web -> api : Request to register referee
+api -> db : Register referee
+db --> api : Referee registration successful
+api --> web : Referee registration successful
+web --> referee : Display successful registration
+@enduml

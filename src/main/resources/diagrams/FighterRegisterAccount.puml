@@ -1,0 +1,17 @@
+@startuml
+
+actor "Fighter" as fighter
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+fighter -> web : Register for an account
+web -> api : Request to create fighter account
+api -> db : Create fighter account in database
+db --> api : Fighter account created
+api --> web : Fighter account created
+web --> fighter : Display successful registration
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+actor "Spectator" as spectator
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+spectator -> web : Access tournament page
+web -> api : Request brackets and match results for each division
+api -> db : Retrieve brackets and match results
+db --> api : Return bracket and match result data
+api --> web : Display brackets and match results
+
+web --> spectator : Show brackets and match results for each division
+@enduml
+
+
+
+
+This diagram illustrates the process of a spectator viewing the brackets and match results for each division. The
+spectator accesses the tournament page on the web interface, which requests the brackets and match results for each
+division from the backend API. The API retrieves the bracket and match result data from the database and returns the
+information to the web interface, which then displays the brackets and match results for each division to the spectator.

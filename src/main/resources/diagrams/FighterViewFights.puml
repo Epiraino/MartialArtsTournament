@@ -1,0 +1,24 @@
+@startuml
+actor "Fighter" as fighter
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+fighter -> web : Access fighter's profile page
+web -> api : Request upcoming matches and results
+api -> db : Retrieve matches and results for fighter
+db --> api : Return match and result data
+api --> web : Display match and result data
+
+web --> fighter : Show upcoming matches and results
+@enduml
+
+
+
+This diagram illustrates the process of a fighter viewing their upcoming matches and results throughout the tournament.
+The fighter accesses their profile page on the web interface, which requests their upcoming matches and results from the
+backend API. The API retrieves the match and result data for the fighter from the database and returns the information
+to the web interface, which then displays the upcoming matches and results to the fighter.

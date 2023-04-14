@@ -1,0 +1,34 @@
+@startuml
+
+actor "Tournament Admin" as admin
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+admin -> web : Access division management page
+web -> api : Request division details and fighters' attributes
+api -> db : Retrieve division details and fighters' attributes
+db --> api : Return division details and fighters' attributes
+api --> web : Display division details and fighters' attributes
+
+admin -> web : Request automatic bracket generation
+web -> api : Request to generate brackets based on fighters' attributes
+api -> db : Retrieve fighters' attributes and generate brackets
+db --> api : Brackets generated successfully
+api --> web : Brackets generated successfully
+web --> admin : Display generated brackets
+@enduml
+
+
+This diagram illustrates the process of a tournament administrator automatically generating brackets for each division
+based on the fighters' attributes. The administrator accesses the division management page on the web interface, which
+requests the division details and fighters' attributes from the backend API. The API retrieves this information from the
+database and sends it back to the web interface, which displays it to the administrator.
+
+The administrator then requests automatic bracket generation through the web interface, which sends a request to the API
+to generate brackets based on the fighters' attributes. The API retrieves the fighters' attributes from the database
+and generates the brackets. Once the brackets are generated successfully, the API sends a response back to the web
+interface, which displays the generated brackets to the tournament administrator.

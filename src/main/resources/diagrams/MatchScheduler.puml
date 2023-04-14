@@ -1,0 +1,36 @@
+@startuml
+
+actor "Tournament Admin" as admin
+
+box "Tournament Management System" #LightBlue
+  participant "Web Interface" as web
+  participant "Backend API" as api
+  database "Database" as db
+end box
+
+admin -> web : Access match scheduling page
+web -> api : Request brackets, matches, referees and time slots
+api -> db : Retrieve brackets, matches, referees and time slots
+db --> api : Return brackets, matches, referees and time slots
+api --> web : Display brackets, matches, referees and time slots
+
+admin -> web : Schedule matches, assign referees and time slots
+web -> api : Update matches with assigned referees and time slots
+api -> db : Update matches in the database
+db --> api : Matches updated successfully
+api --> web : Matches updated successfully
+web --> admin : Display updated matches with referees and time slots
+@enduml
+
+
+
+This diagram illustrates the process of a tournament administrator scheduling matches for each bracket, assigning
+referees, and allocating time slots to ensure the smooth running of the tournament. The administrator accesses the
+match scheduling page on the web interface, which requests the brackets, matches, referees, and time slots from the
+backend API. The API retrieves this information from the database and sends it back to the web interface, which displays
+ it to the administrator.
+
+The administrator then schedules matches, assigns referees, and allocates time slots through the web interface, which
+sends a request to the API to update the matches with the assigned referees and time slots. The API updates the matches
+in the database, and once the matches are updated successfully, the API sends a response back to the web interface,
+which displays the updated matches with referees and time slots to the tournament administrator.
