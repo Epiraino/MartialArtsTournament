@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8"/>
     <title>Martial Arts Tournament Management System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -39,10 +41,15 @@
             <p class="lead">A comprehensive platform for managing martial arts tournaments, including fighter registration, match scheduling, and analytics.</p>
             <hr class="my-4">
             <p>Sign up now to participate in or manage tournaments, or log in to access your existing account.</p>
-            <a class="btn btn-primary btn-lg" th:href="@{/register}" role="button">Sign Up</a>
-            <a class="btn btn-secondary btn-lg" th:href="@{/login}" role="button">Log In</a>
+            <div sec:authorize="isAuthenticated()">
+                <img th:src="${profile.get('picture')}" th:attr="alt=${profile.get('name')}"/>
+                <h2 th:text="${profile.get('name')}"></h2>
+                <p th:text="${profile.get('email')}"></p>
+                <a th:href="@{/logout}">Log Out</a>
+            </div>
         </div>
-    </main>
+
+
 
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">

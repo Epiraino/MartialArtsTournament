@@ -1,4 +1,20 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: ${AUTH0_CLIENT_ID}
+            client-secret: ${AUTH0_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://dev-4g8rmascryvjzzq2.us.auth0.com/
+            redirect-uri: http://localhost:8080/
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/martialartstournament}
     username: ${JDBC_DATABASE_USERNAME}

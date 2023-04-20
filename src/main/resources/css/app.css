@@ -1,0 +1,47 @@
+/* Colors */
+:root {
+  --primary-color: #0D47A1;
+  --secondary-color: #FFC107;
+  --background-color: #FFFFFF;
+  --text-color: #212529;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--primary-color);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--background-color);
+}
+
+.navbar .nav-link:hover {
+  color: var(--secondary-color);
+}
+
+/* Main */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Links */
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
