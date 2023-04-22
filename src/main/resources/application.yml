@@ -1,4 +1,8 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    excluded-view-names: sec
   security:
     oauth2:
       client:

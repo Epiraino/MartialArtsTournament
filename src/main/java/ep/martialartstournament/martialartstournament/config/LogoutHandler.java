@@ -60,8 +60,6 @@ public class LogoutHandler extends SecurityContextLogoutHandler {
                 .encode()
                 .buildAndExpand(clientId, returnTo)
                 .toUriString();
-        System.out.println(logoutUrl);
-
         try {
             httpServletResponse.sendRedirect(logoutUrl);
         } catch (IOException ioe) {

@@ -19,6 +19,8 @@ public class SecurityConfig{
         this.logoutHandler = logoutHandler;
     }
 
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests()
@@ -28,6 +30,7 @@ public class SecurityConfig{
                 .authenticated()
                 .and()
                 .oauth2Login()
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(logoutHandler)

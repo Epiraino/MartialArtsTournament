@@ -24,8 +24,16 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String profile(Model model, @AuthenticationPrincipal OidcUser oidcUser) {
-        model.addAttribute("profile", oidcUser.getClaims());
-        model.addAttribute("profileJson", claimsToJson(oidcUser.getClaims()));
+        try {
+            if (oidcUser != null) {
+                model.addAttribute("profile", oidcUser.getClaims());
+                model.addAttribute("profileJson", claimsToJson(oidcUser.getClaims()));
+            } else {
+                throw new Exception("OidcUser is null.");
+            }
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
         return "profile";
     }
 
